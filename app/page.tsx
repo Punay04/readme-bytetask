@@ -1,11 +1,19 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import { isDate } from "node:util";
 import { useEffect, useState } from "react";
+
+// Minimal type for GitHub repo items returned by the GitHub API
+interface Repo {
+  id: number;
+  name: string;
+  full_name: string;
+  description?: string | null;
+  html_url?: string;
+}
 
 export default function Home() {
   const { data: session, isPending } = authClient.useSession();
-  const [repos, setRepos] = useState([]);
+  const [repos, setRepos] = useState<Repo[]>([]);
   const [selectedRepo, setSelectedRepo] = useState("");
   const [readme, setReadme] = useState("");
   const [loading, setLoading] = useState(false);
@@ -69,8 +77,8 @@ export default function Home() {
                   value={selectedRepo}
                   onChange={(e) => setSelectedRepo(e.target.value)}
                 >
-                  <option value="">Select a repo</option>
-                  {repos.map((repo: any) => (
+                  <option>Select a repo</option>
+                  {repos.map((repo: Repo) => (
                     <option key={repo.id} value={repo.id}>
                       {repo.name}
                     </option>
@@ -152,7 +160,7 @@ export default function Home() {
                 Generating README...
               </p>
             </div>
-          ) : (readme && session?.session.userId) ? (
+          ) : readme && session?.session.userId ? (
             <div className="bg-gray-900 rounded-xl border border-green-700 shadow-xl overflow-auto max-h-[600px] p-4">
               <div className="flex justify-end">
                 <button
@@ -184,7 +192,7 @@ export default function Home() {
                     Your generated README will appear here
                   </p>
                   <p className="text-sm mt-2">
-                    Select a repository and click "Generate README".
+                    Select a repository and click Generate README.
                   </p>
                 </>
               )}
