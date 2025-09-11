@@ -1,5 +1,6 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
+import { isDate } from "node:util";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -123,13 +124,35 @@ export default function Home() {
 
         {/* Right Panel */}
         <div className="md:w-2/3 p-6 bg-black/20 flex flex-col gap-4 min-h-[500px]">
-          {loading ? (
+          {!session?.session.userId && (
+            <div className="flex flex-col items-center justify-center text-center mt-20 text-gray-400">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-12 h-12"
+              >
+                {" "}
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              <p className="text-lg font-medium mt-4">
+                Please log in to generate README files.
+              </p>
+            </div>
+          )}
+          {loading && session?.session.userId ? (
             <div className="flex items-center justify-center h-full">
               <p className="text-green-400 animate-pulse">
                 Generating README...
               </p>
             </div>
-          ) : readme ? (
+          ) : (readme && session?.session.userId) ? (
             <div className="bg-gray-900 rounded-xl border border-green-700 shadow-xl overflow-auto max-h-[600px] p-4">
               <div className="flex justify-end">
                 <button
@@ -140,7 +163,7 @@ export default function Home() {
                       .then(() => alert("Copied to clipboard"));
                   }}
                 >
-                  Copy
+                  Copy Code
                 </button>
               </div>
               <div
@@ -155,12 +178,16 @@ export default function Home() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center text-center mt-20 text-gray-400">
-              <p className="text-lg font-medium">
-                Your generated README will appear here
-              </p>
-              <p className="text-sm mt-2">
-                Select a repository and click "Generate README".
-              </p>
+              {session?.session.userId && (
+                <>
+                  <p className="text-lg font-medium">
+                    Your generated README will appear here
+                  </p>
+                  <p className="text-sm mt-2">
+                    Select a repository and click "Generate README".
+                  </p>
+                </>
+              )}
             </div>
           )}
         </div>
