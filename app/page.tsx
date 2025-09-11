@@ -107,6 +107,8 @@ export default function Home() {
                     setError(
                       "GitHub token missing or expired. Please login again."
                     );
+                  } else if (data.status === 500) {
+                    setError("Internal Server Error. Please try again later.");
                   } else {
                     setReadme(data.generatedReadme);
                   }
@@ -154,7 +156,7 @@ export default function Home() {
               </p>
             </div>
           )}
-          {loading && session?.session.userId ? (
+          {loading && session?.session.userId && !error ? (
             <div className="flex items-center justify-center h-full">
               <p className="text-green-400 animate-pulse">
                 Generating README...
