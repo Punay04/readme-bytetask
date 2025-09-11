@@ -107,10 +107,12 @@ export default function Home() {
                     setError(
                       "GitHub token missing or expired. Please login again."
                     );
-                  } else if (data.status === 500) {
-                    setError("Internal Server Error. Please try again later.");
                   } else {
-                    setReadme(data.generatedReadme);
+                    if (data.generatedReadme) {
+                      setReadme(data.generatedReadme);
+                    } else {
+                      setError("Something went wrong. Please try again.");
+                    }
                   }
                   setLoading(false);
                 }}
