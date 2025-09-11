@@ -35,7 +35,7 @@ export default function Home() {
     );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 flex justify-center items-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 flex justify-center items-start py-12 px-4">
       <div className="w-full max-w-6xl bg-gray-950 bg-opacity-90 rounded-3xl shadow-2xl border border-green-900 overflow-hidden flex flex-col md:flex-row">
         <div className="md:w-1/3 p-6 flex flex-col gap-6 border-b md:border-b-0 md:border-r border-green-800">
           <div className="text-center md:text-left">
