@@ -56,7 +56,7 @@ export default function Home() {
                 onClick={() =>
                   authClient.signIn.social({
                     provider: "github",
-                    callbackURL: "http://localhost:3000",
+                    callbackURL: "https://readme-bytetask.vercel.app",
                   })
                 }
               >
