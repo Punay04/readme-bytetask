@@ -2,7 +2,7 @@
 import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
 
-// Minimal type for GitHub repo items returned by the GitHub API
+// Minimal type for GitHub repo tems returned by the GitHub API
 interface Repo {
   id: number;
   name: string;
@@ -35,8 +35,8 @@ export default function Home() {
     );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 flex justify-center items-start py-12 px-4">
-      <div className="w-full max-w-6xl bg-gray-950 bg-opacity-90 rounded-3xl shadow-2xl border border-green-900 overflow-hidden flex flex-col md:flex-row">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 flex justify-center items-start md:items-center py-12 px-4">
+      <div className="w-full max-w-6xl mx-auto bg-gray-950 bg-opacity-90 rounded-3xl shadow-2xl border border-green-900 overflow-hidden flex flex-col md:flex-row">
         <div className="md:w-1/3 p-6 flex flex-col gap-6 border-b md:border-b-0 md:border-r border-green-800">
           <div className="text-center md:text-left">
             <h1 className="text-3xl font-bold text-green-400">
