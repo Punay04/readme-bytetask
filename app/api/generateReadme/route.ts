@@ -57,6 +57,8 @@ export async function POST(req: NextRequest) {
     }
   );
 
+  console.log("Existing README fetch status:", readmeRes);
+
   const existingReadme = readmeRes.ok ? await readmeRes.text() : "";
   const prompt = `
 You are an expert software engineer and technical writer. Generate a highly professional, visually appealing, and complete README for this GitHub repository:
